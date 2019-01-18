@@ -1,0 +1,14 @@
+{
+  "name": "weather-app-server",
+  "version": "0.0.1",
+  "main": "index.js",
+  "author": "Petr Grinevich",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4",
+    "node-fetch": "^2.3.0"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}
