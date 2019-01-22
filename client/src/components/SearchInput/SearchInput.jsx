@@ -34,7 +34,7 @@ export default class SearchInput extends React.PureComponent {
     onProposalSelect = city => () => {
         const { onCityChange } = this.props;
 
-        onCityChange(city.id, city.name);
+        onCityChange(city);
     }
 
     render() {

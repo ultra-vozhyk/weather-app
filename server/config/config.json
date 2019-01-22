@@ -1,4 +1,4 @@
 {
     "apiKey": "",
-    "apiUrl": "http://history.openweathermap.org/data/2.5/history/accumulated_temperature"
+    "apiUrl": " https://api.darksky.net/forecast"
 }

@@ -19,19 +19,25 @@ class App extends Component {
 
   onSearchChange = async (city) => {
     const cityList = await ApiHelper.findCity(city);
+
     this.setState({ cityList });
   }
 
   onCityChange = async (selectedCity) => {
+    const { coord } = selectedCity;
+    let temperature = [];
 
-    const temperature = await ApiHelper.getTemperatureForCity(selectedCity);
-    this.setState({ temperature });
+    if(!localStorage.getItem('temp')) {
+      temperature = await ApiHelper.getTemperatureForCity(coord.lat, coord.lon);
+    
+      localStorage.setItem('temp', JSON.stringify(temperature));
+    } else {
+      temperature = await new Promise((resolve) => resolve(localStorage.getItem('temp')));
+    }
+    
+    this.setState({ selectedCity, temperature });
   }
-/*
-  onCityChange = (id, name) => {
-    this.setState({ selectedCity: { id, name }}); 
-  }
-*/
+
   render() {
     const { cityList, selectedCity } = this.state;
     

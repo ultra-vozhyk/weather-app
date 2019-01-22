@@ -3,7 +3,7 @@ export default {
         return fetch(`/city/${name}`).then(res => res.json());
     },
 
-    getTemperatureForCity(city) {
-        return fetch(`/temperature/${city}`).then(res => res.json);
+    getTemperatureForCity(lat, lon) {
+        return fetch(`/temperature/${lat},${lon}`).then(res => res.json());
     }
 }

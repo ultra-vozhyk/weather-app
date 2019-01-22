@@ -1,15 +1,20 @@
 
-const buildQueries = (url, id, apiKey) => {
+const buildQueries = (url, apiKey, lat, lon) => {
     const queries = [];
-    const today = new Date();
-    const days = today.getDate();
-    today.setHours(0, 0, 0);
-    today.setMilliseconds(0);
+    const startDate = new Date();
+    const endDate = new Date();
+    
+    endDate.setDate(0);
+    endDate.setMinutes(0, 0, 0);
+    startDate.setMonth(startDate.getMonth() - 1);
+    startDate.setDate(0);
+    startDate.setMinutes(0, 0, 0);
+    
+    while(startDate < endDate) {
+        const date = Date.UTC(startDate.getFullYear(), startDate.getMonth(), startDate.getDay()) / 1000;
+        queries.push(`${url}/${apiKey}/${lat},${lon},${date}?exclude=currently,minutely,hourly,alerts,flags`);
 
-    for(let i = 0; i < days; i = i + 7) {
-        today.setDate(i);
-
-        queries.push(`${url}?id=${id}&type=hour&start=${today.getTime()}&appid=${apiKey}`)
+        startDate.setDate(startDate.getDate() + 1);
     }
 
     return queries;
